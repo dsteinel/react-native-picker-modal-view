@@ -68,7 +68,7 @@ export class ModalComponent extends React.PureComponent<IModalProps, IModalState
 	}
 
 	public openModal(): void {
-		this._openModal();
+		// this._openModal();
 	}
 
 	public render(): JSX.Element {
@@ -78,76 +78,7 @@ export class ModalComponent extends React.PureComponent<IModalProps, IModalState
 
 		return (
 			<React.Fragment>
-				<SelectBoxComponent
-					renderSelectView={renderSelectView}
-					items={items}
-					disabled={disabled}
-					selectedObject={selectedObject}
-					chooseText={(selected && selected.Name) ? selected.Name : selectPlaceholderText}
-					openModal={this.openModal.bind(this)}
-				/>
-				<Modal
-					animationType={modalAnimationType}
-					visible={modalVisible}
-					onRequestClose={() => onClosed}
-					{...ModalProps}
-				>
-					<SafeAreaView style={ModalStyles.container}>
-						{
-							renderSearch ? renderSearch(
-									this.onClose.bind(this), 
-									this.onBackRequest.bind(this)
-								) : (
-								<SearchComponent
-									searchText={searchPlaceholderText}
-									placeholderTextColor={searchInputTextColor}
-									onClose={this.onClose.bind(this)}
-									onBackRequest={this.onBackRequest.bind(this)}
-									forceSelect={requireSelection}
-									setText={(text: string) => this.setText(text)}
-									backButtonDisabled={backButtonDisabled}
-									{...SearchInputProps}
-								/>
-							)
-						}
-						<KeyboardAvoidingView style={ModalStyles.keyboardContainer}
-							behavior={Platform.OS === 'ios' ? 'padding' : null}
-							enabled>
-							<View style={ModalStyles.listArea}>
-								<FlatList
-									ref={(ref) => this.flatListRef = ref}
-									keyExtractor={keyExtractor ? keyExtractor : (item, index) => index.toString()}
-									data={getFilteredData(items, autoSort, searchText)}
-									renderItem={({ item, index }) => this.renderItem(item, index)}
-									onScroll={showToTopButton && this.onScrolling.bind(this)}
-									initialNumToRender={this.numToRender}
-									keyboardShouldPersistTaps={'always'}
-									keyboardDismissMode={'interactive'}
-									onEndReached={onEndReached}
-									maxToRenderPerBatch={20}
-									legacyImplementation={false}
-									updateCellsBatchingPeriod={50}
-									removeClippedSubviews={removeClippedSubviews}
-									viewabilityConfig={this.viewabilityConfig}
-									getItemLayout={(_, index) => ({
-										length: CommonStyle.BTN_HEIGHT,
-										offset: CommonStyle.BTN_HEIGHT * index,
-										index
-									})}
-									onViewableItemsChanged={this._onViewableItemsChanged}
-									{...FlatListProps}
-								/>
-								<AlphabetComponent
-									showAlphabeticalIndex={showAlphabeticalIndex}
-									setAlphabet={(alphabet: string) => this.setAlphabet(alphabet)}
-									alphabets={alphabeticalIndexChars}
-									selectedAlpha={selectedAlpha}
-								/>
-							</View>
-						</KeyboardAvoidingView>
-						<ScrollToTopComponent goToUp={this.scrollToUp.bind(this)} stickyBottomButton={stickyBottomButton} />
-					</SafeAreaView>
-				</Modal>
+
 			</React.Fragment >
 		);
 	}
@@ -182,7 +113,7 @@ export class ModalComponent extends React.PureComponent<IModalProps, IModalState
 	}
 
 	public onClose(): void {
-		this._onClose();
+		// this._onClose();
 	}
 
 	private _onBackRequest(): void {
